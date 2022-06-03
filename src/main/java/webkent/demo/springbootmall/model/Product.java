@@ -2,6 +2,8 @@ package webkent.demo.springbootmall.model;
 
 
 
+import webkent.demo.springbootmall.constant.ProductCategory;
+
 import javax.persistence.*;
 import java.util.Date;
 
@@ -15,8 +17,9 @@ public class Product {
     private Integer productId;
     @Column(name="product_name")
     private String productName;
+    @Enumerated(EnumType.STRING)
     @Column(name="category")
-    private String category;
+    private ProductCategory category;
     @Column(name="image_url")
     private String imageUrl;
     @Column(name="price")
@@ -46,11 +49,11 @@ public class Product {
         this.productName=productName;
     }
 
-    public String getCategory() {
+    public ProductCategory getCategory() {
         return category;
     }
 
-    public void setCategory(String category) {
+    public void setCategory(ProductCategory category) {
         this.category=category;
     }
 
