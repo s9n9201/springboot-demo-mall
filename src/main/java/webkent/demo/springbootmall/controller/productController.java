@@ -3,11 +3,12 @@ package webkent.demo.springbootmall.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+import webkent.demo.springbootmall.dto.ProductRequest;
 import webkent.demo.springbootmall.model.Product;
 import webkent.demo.springbootmall.service.ProductService;
+
+import javax.validation.Valid;
 
 @RestController
 public class productController {
@@ -23,5 +24,11 @@ public class productController {
         } else {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
         }
+    }
+
+    @PostMapping("/products")
+    public ResponseEntity<?> createProduct(@RequestBody @Valid ProductRequest productRequest) {
+        Product product=productService.createProduct(productRequest);
+        return ResponseEntity.status(HttpStatus.CREATED).body(product);
     }
 }

@@ -1,10 +1,18 @@
 package webkent.demo.springbootmall.service.impl;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import webkent.demo.springbootmall.Repository.ProductRepository;
+import webkent.demo.springbootmall.dto.ProductRequest;
 import webkent.demo.springbootmall.model.Product;
 import webkent.demo.springbootmall.service.ProductService;
+
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class ProductServiceImpl implements ProductService {
@@ -16,4 +24,20 @@ public class ProductServiceImpl implements ProductService {
 
         return productRepository.getProductByProductId(prodcutId);
     }
+
+    @Override
+    public Product createProduct(ProductRequest productRequest) {
+        Product product=new Product();
+        Date now=new Date();
+        product.setProductName(productRequest.getProductName());
+        product.setCategory(productRequest.getCategory());
+        product.setImageUrl(productRequest.getImageUrl());
+        product.setPrice(productRequest.getPrice());
+        product.setStock(productRequest.getStock());
+        product.setDescription(productRequest.getDescription());
+        product.setCreateDate(now);
+        product.setLastModifiedDate(now);
+        return productRepository.save(product);
+    }
+
 }
