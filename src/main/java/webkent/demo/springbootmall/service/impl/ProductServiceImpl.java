@@ -16,7 +16,6 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public Product getProductByProductId(Integer prodcutId) {
-
         return productRepository.getProductByProductId(prodcutId);
     }
 

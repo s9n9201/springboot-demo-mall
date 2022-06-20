@@ -8,6 +8,8 @@ import webkent.demo.springbootmall.dto.ProductRequest;
 import webkent.demo.springbootmall.model.Product;
 import webkent.demo.springbootmall.service.ProductService;
 
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 import javax.validation.Valid;
 
 @RestController
@@ -15,6 +17,9 @@ public class productController {
 
     @Autowired
     private ProductService productService;
+
+    @PersistenceContext
+    private EntityManager entityManger;
 
     @GetMapping("/products/{productId}")
     public ResponseEntity<?> getProduct(@PathVariable Integer productId) {
@@ -40,6 +45,7 @@ public class productController {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
         }
         productService.updateProduct(productId, productRequest);
+        entityManger.clear();
         Product updatedProduct = productService.getProductByProductId(productId);
         return ResponseEntity.status(HttpStatus.OK).body(updatedProduct);
     }
