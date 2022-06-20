@@ -1,7 +1,7 @@
 package webkent.demo.springbootmall.model;
 
-
-
+import org.hibernate.annotations.DynamicUpdate;
+import org.springframework.data.annotation.CreatedDate;
 import webkent.demo.springbootmall.constant.ProductCategory;
 
 import javax.persistence.*;
@@ -28,7 +28,8 @@ public class Product {
     private Integer stock;
     @Column(name="description")
     private String description;
-    @Column(name="created_date")
+
+    @Column(name="created_date", updatable=false)
     private Date createDate;
     @Column(name="last_modified_date")
     private Date lastModifiedDate;
