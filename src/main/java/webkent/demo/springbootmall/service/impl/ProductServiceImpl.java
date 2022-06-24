@@ -35,7 +35,7 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public Void updateProduct(Integer productId, ProductRequest productRequest) {
+    public void updateProduct(Integer productId, ProductRequest productRequest) {
         Product product=new Product();
         Date now=new Date();
         product.setProductId(productId);
@@ -47,6 +47,14 @@ public class ProductServiceImpl implements ProductService {
         product.setDescription(productRequest.getDescription());
         product.setLastModifiedDate(now);
         productRepository.save(product);
-        return null;
+    }
+
+    @Override
+    public void deleteProductById(Integer productId) {
+        Date now=new Date();
+        Product product=getProductByProductId(productId);
+        product.setIsDelete(1);
+        product.setLastModifiedDate(now);
+        productRepository.save(product);
     }
 }

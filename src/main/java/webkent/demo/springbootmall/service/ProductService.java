@@ -8,5 +8,7 @@ public interface ProductService {
 
     Product createProduct(ProductRequest productRequest);
 
-    Void updateProduct(Integer productId, ProductRequest productRequest);
+    void updateProduct(Integer productId, ProductRequest productRequest);
+
+    void deleteProductById(Integer productId);
 }
