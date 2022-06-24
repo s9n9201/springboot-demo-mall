@@ -1,7 +1,5 @@
 package webkent.demo.springbootmall.model;
 
-import org.hibernate.annotations.DynamicUpdate;
-import org.springframework.data.annotation.CreatedDate;
 import webkent.demo.springbootmall.constant.ProductCategory;
 
 import javax.persistence.*;
@@ -28,6 +26,9 @@ public class Product {
     private Integer stock;
     @Column(name="description")
     private String description;
+
+    @Column(name="is_delete")
+    private Integer isDelete;
 
     @Column(name="created_date", updatable=false)
     private Date createDate;
@@ -88,6 +89,14 @@ public class Product {
 
     public void setDescription(String description) {
         this.description=description;
+    }
+
+    public Integer getIsDelete() {
+        return isDelete;
+    }
+
+    public void setIsDelete(Integer isDelete) {
+        this.isDelete=isDelete;
     }
 
     public Date getCreateDate() {
